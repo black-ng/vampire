@@ -1,15 +1,36 @@
-using System;
+using Timers;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    // 攻击  通常挂在玩家身上
+    // 扣血冷却1秒
+    private bool canAttack = true;
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Player"))
+        DealDamage(col);
+    }
+    
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        DealDamage(other);
+    }
+
+    private void DealDamage(Collider2D other)
+    {
+        if (!canAttack) return;
+        
+        if (other.CompareTag("Player"))
         {
-            var damageable = col.GetComponent<Damageable>();
+            var damageable = other.GetComponent<Damageable>();
             damageable.TakeDamage(1);
+            
+            TimersManager.SetTimer(this,1,CanAttack);
+            canAttack = false;
         }
+    }
+    
+    private void CanAttack()
+    {
+        canAttack = true;
     }
 }
