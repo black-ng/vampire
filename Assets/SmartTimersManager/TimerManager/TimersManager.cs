@@ -27,9 +27,9 @@ namespace Timers
 #endif
                 Destroy(this);
             }
-
-            DontDestroyOnLoad(this);
-            DontDestroyOnLoad(gameObject);
+            //修正重新载入场景报错
+            //DontDestroyOnLoad(this);
+            //DontDestroyOnLoad(gameObject);
             m_instance = this;
         }
 

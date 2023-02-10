@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _inputDirection;    // 移動方向
 
 
+    // 移动角色
     public void Move(InputAction.CallbackContext context)
     { 
         _inputDirection = context.ReadValue<Vector2>();
